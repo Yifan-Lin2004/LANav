@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LANav: linear attention and weighted state expansion for open-vocabulary object goal navigation. Research paper, results, and real-robot demonstration.">
+  <link rel="canonical" href="https://yifan-lin2004.github.io/LANav/">
+  <meta property="og:url" content="https://yifan-lin2004.github.io/LANav/">
+  <meta name="theme-color" content="#123b43">
+  <meta property="og:title" content="LANav — Beyond Transformers">
+  <meta property="og:description" content="A linear attention policy for open-vocabulary object goal navigation. Explore the paper, method, and Unitree Go2 demonstration.">
+  <meta property="og:type" content="website">
+  <title>LANav | Beyond Transformers</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="media.js" defer></script>
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="wordmark" href="#" aria-label="LANav home"><span class="logo-mark" aria-hidden="true">↗</span>LANav<span class="wordmark-dot">.</span></a>
+      <div class="nav-links"><a href="#abstract">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#demo">Demo</a><a href="#citation">Citation</a></div>
+      <a class="nav-paper" href="https://arxiv.org/abs/2607.18794" target="_blank" rel="noopener">Read paper <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero container" aria-labelledby="paper-title">
+      <p class="eyebrow"><span class="small-dot" aria-hidden="true"></span> Linear Attention-based Navigation</p>
+      <h1 id="paper-title">Beyond Transformers with a linear attention policy for open-vocabulary object goal navigation</h1>
+      <p class="hero-summary">Structured recurrent memory for navigation from RGB observations and language-specified goals.</p>
+      <div class="authors" aria-label="Authors">
+        <span>Jiahong Zhang<sup>1,2,†</sup></span><span>Yifan Lin<sup>1,3,†</sup></span><span>Yandong Zhang<sup>4</sup></span><span>Sijun Shen<sup>1,3</sup></span><span>Kexin Wang<sup>1,2</sup></span><span>Yuqi Pan<sup>1,2</sup></span><span>Hongjuan Pei<sup>5</sup></span><span>Wei Wang<sup>4</sup></span><span>Guoqi Li<sup>1,*</sup></span>
+      </div>
+      <p class="author-notes">† Equal contribution &nbsp; · &nbsp; * Corresponding author</p>
+      <details class="affiliations">
+        <summary>Author affiliations <span aria-hidden="true">⌄</span></summary>
+        <ol>
+          <li>Institute of Automation, Chinese Academy of Sciences, Beijing 100045, China</li>
+          <li>School of Artificial Intelligence, University of Chinese Academy of Sciences, Beijing 100049, China</li>
+          <li>State Key Laboratory of Media Convergence and Communication, Communication University of China, Beijing 100024, China</li>
+          <li>Beihang University, Beijing 100191, China</li>
+          <li>University of Chinese Academy of Sciences, No.19A Yuquan Road, Beijing 100049, China</li>
+        </ol>
+      </details>
+      <div class="resource-links" aria-label="Project resources">
+        <a class="button button-dark" href="https://arxiv.org/abs/2607.18794" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg>Paper (arXiv) <span aria-hidden="true">↗</span></a>
+        <a class="button button-teal" href="video.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6z"/></svg>Robot video</a>
+        <span class="button code-status"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>Code <span>Release planned</span></span>
+        <a class="button button-light" href="#citation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h6v7H7v5H3v-5l2-7zM15 6h6v7h-4v5h-4v-5l2-7z"/></svg>BibTeX</a>
+      </div>
+      <p class="manuscript-note"><a href="https://arxiv.org/abs/2607.18794" target="_blank" rel="noopener">arXiv:2607.18794</a> · Project resources and real-world demonstration</p>
+    </section>
+
+    <section class="metrics container" aria-label="Key research results">
+      <div class="metric"><span class="metric-value">36.4<span>%</span></span><p>HM3D-OVON average success</p><small>Macro-average across three validation splits</small></div>
+      <div class="metric"><span class="metric-value">+6.3<span> pp</span></span><p>Over the matched Transformer</p><small>36.4% vs. 30.1% average success rate</small></div>
+      <div class="metric"><span class="metric-value">41<span> / 50</span></span><p>Successful real robot trials</p><small>82% success on a Unitree Go2</small></div>
+    </section>
+
+    <section class="section container" id="demo" aria-labelledby="demo-title">
+      <div class="section-heading"><div><p class="eyebrow">In the real world</p><h2 id="demo-title">From simulation to a Unitree Go2</h2></div><a class="text-link" href="video.html">Open video page <span aria-hidden="true">↗</span></a></div>
+      <figure class="video-figure">
+        <div class="video-frame"><video controls playsinline preload="metadata" data-video-manifest="assets/robot-demo.json" poster="assets/video-poster.jpg" aria-label="LANav real robot navigation demonstration">Your browser does not support embedded video. <a href="video.html" data-media-download="assets/robot-demo.json">Download the robot demonstration.</a></video></div>
+        <figcaption><span>Real-world demonstration of LANav on a Unitree Go2 robot.</span><a href="video.html" data-media-download="assets/robot-demo.json">Download video <span aria-hidden="true">↓</span></a></figcaption>
+      </figure>
+      <div class="robot-description"><p>The policy receives an egocentric RGB image, a language-specified goal, and the previous action. A lightweight adapter translates its discrete decisions into robot motion commands.</p><p>In one indoor environment, we evaluate five object categories from two starting locations, with five repetitions per target–start pair. LANav succeeds in <strong>41 of 50 trials (82%)</strong>. The video illustrates deployment behavior.</p></div>
+      <div class="category-list" aria-label="Evaluated object categories"><span class="category-label">Target categories</span><span>Trash bin</span><span>Box</span><span>Plant</span><span>Chair</span><span>Table</span></div>
+    </section>
+
+    <section class="section section-tinted" id="abstract" aria-labelledby="abstract-title">
+      <div class="container abstract-layout"><div><p class="eyebrow">The idea</p><h2 id="abstract-title">History matters.<br>How we update it matters, too.</h2></div><div class="abstract-copy"><p>Open-vocabulary object goal navigation requires an agent to integrate past observations while searching for language-specified objects in unfamiliar environments. We introduce <strong>Linear Attention-based Navigation (LANav)</strong>, a policy that represents navigation history through structured recurrent states.</p><p>Controlled experiments with matched architectures and training settings show that linear-attention backbones outperform recurrent and Transformer baselines, and that stronger state-update rules yield better navigation performance.</p><p>Our <strong>Weighted State-Expansion Linear Attention (WSLA)</strong> expands each attention head into multiple sub-states and combines their outputs through a learnable weighted readout. LANav with WSLA reaches a 36.4% macro-averaged success rate on HM3D-OVON, improves transfer and adaptation to HSSD, and succeeds in 41 of 50 real robot trials.</p></div></div>
+    </section>
+
+    <section class="section container" id="method" aria-labelledby="method-title">
+      <div class="section-heading"><div><p class="eyebrow">Method</p><h2 id="method-title">A navigation policy with structured memory</h2></div><span class="section-number" aria-hidden="true">01 / METHOD</span></div>
+      <p class="section-intro">LANav encodes the current RGB observation, the object goal, and the previous action. A linear-attention backbone updates recurrent memory and predicts the next navigation action.</p>
+      <figure class="research-figure"><img src="assets/architecture.png" alt="LANav architecture: visual, text, and previous-action encoders feed a policy backbone and action head; linear attention updates a recurrent state instead of using full-context self-attention." loading="lazy" width="1526" height="571"><figcaption><span class="figure-label">Figure 1</span>Overview of LANav and the policy backbone comparison.</figcaption></figure>
+      <div class="method-points">
+        <article><span class="point-number">01</span><h3>Compare the backbone</h3><p>Keep the visual and language encoders and training pipeline fixed to isolate how the policy integrates its history.</p></article>
+        <article><span class="point-number">02</span><h3>Regulate state updates</h3><p>Compare Linear Transformer, DeltaNet, and Gated DeltaNet to study increasingly structured memory updates.</p></article>
+        <article><span class="point-number">03</span><h3>Expand the memory</h3><p>WSLA introduces independent sub-states per attention head and learns how to combine their readouts.</p></article>
+      </div>
+      <div class="wsla-panel"><div class="wsla-copy"><p class="eyebrow">Weighted state expansion</p><h3>More expressive states.<br>A learned readout.</h3><p>Each attention head maintains multiple sub-states. Learnable weights regulate how their outputs contribute to the final representation, increasing the expressivity of navigation memory.</p></div><figure><svg class="wsla-diagram" viewBox="0 0 520 238" role="img" aria-labelledby="wsla-diagram-title wsla-diagram-desc"><title id="wsla-diagram-title">WSLA state expansion schematic</title><desc id="wsla-diagram-desc">An attention head updates multiple recurrent sub-states. Their outputs are combined through a learned weighted readout.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#8baba7" stroke="none"/></marker></defs><g fill="none" stroke="#8baba7" stroke-width="1.4" marker-end="url(#arrow)"><path d="M110 119H135V51H163"/><path d="M135 119H163"/><path d="M135 119V187H163"/><path d="M283 51H321V119H348"/><path d="M283 119H348"/><path d="M283 187H321V119"/></g><rect x="5" y="94" width="105" height="50" rx="9" fill="#f2f6f5" stroke="#cfdedb"/><text x="57" y="123" text-anchor="middle" font-size="13" fill="#385c60" stroke="none">Attention head</text><g fill="#eaf5f1" stroke="#bfdcd1"><rect x="163" y="28" width="120" height="46" rx="8"/><rect x="163" y="96" width="120" height="46" rx="8"/><rect x="163" y="164" width="120" height="46" rx="8"/></g><g text-anchor="middle" font-size="13" fill="#176662" stroke="none"><text x="223" y="56">Sub-state 1</text><text x="223" y="124">Sub-state 2</text><text x="223" y="191">Sub-state N</text><text x="223" y="157" font-size="14">⋮</text></g><rect x="348" y="87" width="161" height="64" rx="9" fill="#146d6b" stroke="none"/><g text-anchor="middle" font-size="13" fill="#fff" stroke="none"><text x="428" y="113">Learned weighted</text><text x="428" y="131">readout</text></g><text x="223" y="229" text-anchor="middle" font-size="10" fill="#78868b" stroke="none">Independent recurrent updates</text></svg><figcaption><span class="figure-label">WSLA</span>Conceptual schematic of state expansion and weighted readout.</figcaption></figure></div>
+    </section>
+
+    <section class="section section-tinted" id="results" aria-labelledby="results-title">
+      <div class="container"><div class="section-heading"><div><p class="eyebrow">Evaluation</p><h2 id="results-title">Stronger navigation across goal vocabularies</h2></div><span class="section-number" aria-hidden="true">02 / RESULTS</span></div>
+      <p class="section-intro">On HM3D-OVON, WSLA achieves the highest average success rate among the reproduced backbones under matched training settings.</p>
+      <div class="table-card"><div class="table-title"><h3>HM3D-OVON backbone comparison</h3><span>SR / SPL (%) ↑</span></div><div class="table-scroll" tabindex="0" role="region" aria-label="HM3D-OVON results, scroll horizontally on small screens"><table><thead><tr><th rowspan="2" scope="col">Policy backbone</th><th colspan="2" scope="colgroup">VAL SEEN</th><th colspan="2" scope="colgroup">VAL SEEN SYN</th><th colspan="2" scope="colgroup">VAL UNSEEN</th><th rowspan="2" scope="col">Average SR</th></tr><tr><th scope="col">SR</th><th scope="col">SPL</th><th scope="col">SR</th><th scope="col">SPL</th><th scope="col">SR</th><th scope="col">SPL</th></tr></thead><tbody>
+        <tr><th scope="row">GRU</th><td>39.0 ± 0.3</td><td>15.0 ± 0.3</td><td>29.3 ± 0.3</td><td>11.5 ± 0.1</td><td>11.7 ± 0.3</td><td>3.8 ± 0.1</td><td>26.7 ± 0.2</td></tr>
+        <tr><th scope="row">Transformer</th><td>41.5 ± 0.3</td><td>21.0 ± 0.3</td><td>29.9 ± 0.3</td><td>14.5 ± 0.1</td><td>19.0 ± 0.3</td><td>7.1 ± 0.1</td><td>30.1 ± 0.2</td></tr>
+        <tr><th scope="row">DAgRL</th><td>41.3 ± 0.3</td><td>21.2 ± 0.3</td><td>29.4 ± 0.3</td><td>14.4 ± 0.1</td><td>18.3 ± 0.3</td><td>7.9 ± 0.1</td><td>29.7 ± 0.2</td></tr>
+        <tr><th scope="row">Linear Transformer</th><td>42.9 ± 0.5</td><td>18.8 ± 0.4</td><td>31.8 ± 0.4</td><td>12.9 ± 0.2</td><td>19.2 ± 0.3</td><td>7.1 ± 0.1</td><td>31.3 ± 0.2</td></tr>
+        <tr><th scope="row">DeltaNet</th><td>45.3 ± 0.5</td><td>21.2 ± 0.4</td><td>35.0 ± 0.4</td><td>15.1 ± 0.2</td><td>21.5 ± 0.4</td><td>7.5 ± 0.3</td><td>33.9 ± 0.3</td></tr>
+        <tr><th scope="row">Gated DeltaNet</th><td>46.6 ± 0.3</td><td>22.4 ± 0.3</td><td>36.6 ± 0.4</td><td>15.5 ± 0.2</td><td>20.5 ± 0.3</td><td>7.5 ± 0.2</td><td>34.6 ± 0.2</td></tr>
+        <tr class="ours-row"><th scope="row">WSLA <span class="ours-tag">Ours</span></th><td>47.8 ± 0.4</td><td>22.9 ± 0.3</td><td>39.8 ± 0.5</td><td>16.2 ± 0.3</td><td>21.6 ± 0.4</td><td>8.2 ± 0.3</td><td><strong>36.4 ± 0.3</strong></td></tr>
+      </tbody></table></div><div class="table-notes"><p>Mean ± standard deviation over three seeds. Attention-based models use a context length of 500. Average SR is the macro-average across the three validation splits.</p><p><strong>SR:</strong> success rate. <strong>SPL:</strong> success weighted by path length. SEEN uses training goal categories; SEEN SYN uses unseen, semantically similar names; UNSEEN uses semantically distinct unseen categories.</p></div></div>
+      <div class="transfer-panel"><div class="transfer-copy"><p class="eyebrow">Across scene distributions</p><h3>Transfer to HSSD</h3><p>WSLA improves both zero-shot transfer from HM3D-OVON and adaptation with 60 million additional training steps on HSSD.</p></div><div class="transfer-charts"><div class="mini-chart"><h4>Zero-shot <span>Success rate</span></h4><div class="bar-row"><span>Transformer</span><div class="bar-track"><span class="bar baseline" style="--bar:27.9%"></span></div><strong>19.55%</strong></div><div class="bar-row"><span>WSLA</span><div class="bar-track"><span class="bar ours" style="--bar:41.7%"></span></div><strong>29.17%</strong></div></div><div class="mini-chart"><h4>Fine-tuned <span>Success rate</span></h4><div class="bar-row"><span>Transformer</span><div class="bar-track"><span class="bar baseline" style="--bar:80.2%"></span></div><strong>56.17%</strong></div><div class="bar-row"><span>WSLA</span><div class="bar-track"><span class="bar ours" style="--bar:92.1%"></span></div><strong>64.50%</strong></div></div><p class="chart-note">Shared chart scale: 0–70% success. Matched policy inputs, action space, context length, and evaluation metrics.</p></div></div>
+    </div></section>
+
+    <section class="section container citation-section" id="citation" aria-labelledby="citation-title">
+      <div class="section-heading"><div><p class="eyebrow">Citation</p><h2 id="citation-title">Cite this work</h2></div><div class="citation-actions"><a class="text-link" href="assets/lanav.bib" download>Download .bib <span aria-hidden="true">↓</span></a><button class="button button-light copy-button" type="button" id="copy-citation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h11v13H9zM15 8V3H4v13h5"/></svg><span>Copy BibTeX</span></button></div></div>
+      <div class="citation-box"><pre id="bibtex"><code>@misc{zhang2026lanav,
+  title = {Beyond Transformers: Linear Attention Policy for
+           Open-Vocabulary Object Goal Navigation},
+  author = {Zhang, Jiahong and Lin, Yifan and Zhang, Yandong and
+            Shen, Sijun and Wang, Kexin and Pan, Yuqi and
+            Pei, Hongjuan and Wang, Wei and Li, Guoqi},
+  year = {2026},
+  eprint = {2607.18794},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.RO},
+  doi = {10.48550/arXiv.2607.18794},
+  url = {https://arxiv.org/abs/2607.18794}
+}</code></pre></div><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="wordmark" href="#"><span class="logo-mark" aria-hidden="true">↗</span>LANav<span class="wordmark-dot">.</span></a><p>Linear Attention-based Navigation · Research project</p><div><a href="https://arxiv.org/pdf/2607.18794" data-media-download="assets/manuscript.json">Manuscript PDF</a><a href="video.html">Video</a><a href="#citation">Citation</a></div></div></footer>
+</body>
+</html>

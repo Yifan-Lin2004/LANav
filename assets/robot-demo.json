@@ -1,0 +1,100 @@
+{
+  "filename": "lanav-real-robot-demo.mp4",
+  "type": "video/mp4",
+  "bytes": 23561732,
+  "sha256": "2745b56444b6f2c1a1a7a76466ed75135103a3a7b13992dc02134ef48aadb007",
+  "parts": [
+    {
+      "path": "video/demo.part000",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part001",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part002",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part003",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part004",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part005",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part006",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part007",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part008",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part009",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part010",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part011",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part012",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part013",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part014",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part015",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part016",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part017",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part018",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part019",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part020",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part021",
+      "bytes": 1048575
+    },
+    {
+      "path": "video/demo.part022",
+      "bytes": 493082
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "filename": "LANav-manuscript.pdf",
+  "type": "application/pdf",
+  "bytes": 3492372,
+  "sha256": "2a20592abc54b0b8674de6c5a6a79c5019c56902f916a6ee5aa827170a8ec4b8",
+  "parts": [
+    {
+      "path": "manuscript/paper.part000",
+      "bytes": 1048575
+    },
+    {
+      "path": "manuscript/paper.part001",
+      "bytes": 1048575
+    },
+    {
+      "path": "manuscript/paper.part002",
+      "bytes": 1048575
+    },
+    {
+      "path": "manuscript/paper.part003",
+      "bytes": 346647
+    }
+  ]
+}
