@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - wsla_ppo
+  - _self_
+
+habitat_baselines:
+  num_environments: 1
+  total_num_steps: 8
+  num_checkpoints: 1
+  checkpoint_folder: outputs/smoke/ppo
+  tensorboard_dir: outputs/smoke/tb_ppo
+  log_file: outputs/smoke/ppo.log
+  rl:
+    ppo:
+      num_steps: 8
+      num_mini_batch: 1

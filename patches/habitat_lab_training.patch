@@ -1,0 +1,78 @@
+--- a/habitat-baselines/habitat_baselines/rl/ver/ver_rollout_storage.py
++++ b/habitat-baselines/habitat_baselines/rl/ver/ver_rollout_storage.py
+@@ -66,6 +66,41 @@
+     return [n // p + (1 if i < (n % p) else 0) for i in range(p)]
+ 
+ 
++def _permute_tensor_first_dim_in_place(
++    tensor: torch.Tensor, ordering: torch.Tensor
++) -> None:
++    r"""Apply ``tensor[:] = tensor.index_select(0, ordering)`` in place.
++
++    VER reorders its retained experience after every rollout.  LANav's
++    500-step WSLA history makes the recurrent-state tensor large enough that a
++    second full-sized ``index_select`` result can exhaust an 80 GB GPU.  Cycle
++    decomposition keeps only one first-dimension slice as scratch storage.
++    """
++
++    if tensor.shape[0] <= 1:
++        return
++
++    permutation = ordering.detach().to(device="cpu", dtype=torch.int64).tolist()
++    visited = [False] * len(permutation)
++    for start in range(len(permutation)):
++        if visited[start]:
++            continue
++
++        visited[start] = True
++        next_index = permutation[start]
++        if next_index == start:
++            continue
++
++        scratch = tensor[start].clone()
++        current = start
++        while next_index != start:
++            tensor[current].copy_(tensor[next_index])
++            current = next_index
++            visited[current] = True
++            next_index = permutation[current]
++        tensor[current].copy_(scratch)
++
++
+ def generate_ver_mini_batches(
+     num_mini_batch: int,
+     sequence_lengths: np.ndarray,
+@@ -377,11 +412,15 @@
+                 descending=True,
+             )
+ 
+-            self.buffers.apply(
+-                lambda t: t[self._num_envs :].copy_(
+-                    t[self._num_envs :].index_select(0, version_ordering)
+-                )
+-            )
++            def _reorder_tensor(t: torch.Tensor) -> None:
++                retained = t[self._num_envs :]
++                retained_nbytes = retained.nelement() * retained.element_size()
++                if retained_nbytes > 256 * 1024 * 1024:
++                    _permute_tensor_first_dim_in_place(retained, version_ordering)
++                else:
++                    retained.copy_(retained.index_select(0, version_ordering))
++
++            self.buffers.apply(_reorder_tensor)
+ 
+         self.num_steps_collected[:] = 0
+         self.rollout_done[:] = False
+@@ -615,6 +654,12 @@
+                 assert isinstance(
+                     batch["recurrent_hidden_states"], torch.Tensor
+                 )
++                # Preserve the exact WSLA history stored at every packed
++                # sequence start before Habitat compresses recurrent state to
++                # one entry per environment for its conventional RNN path.
++                rnn_build_seq_info["sequence_start_hidden_states"] = batch[
++                    "recurrent_hidden_states"
++                ].index_select(0, rnn_build_seq_info["sequence_starts"])
+                 batch["recurrent_hidden_states"] = batch[
+                     "recurrent_hidden_states"
+                 ].index_select(

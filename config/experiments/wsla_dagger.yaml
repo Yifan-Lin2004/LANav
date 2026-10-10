@@ -1,0 +1,110 @@
+# @package _global_
+# Paper configuration: online oracle-forced DAgger stage, 150M environment steps.
+
+defaults:
+  - /habitat_baselines: habitat_baselines_rl_config_base
+  - /habitat_baselines/rl/policy/obs_transforms:
+    - resize
+    - relabel_teacher_actions
+  - /habitat/task/measurements:
+    - frontier_exploration_map
+  - ../tasks/objectnav_stretch_hm3d
+  - override /habitat/task/lab_sensors:
+    - objnav_explorer
+    - clip_objectgoal_sensor
+    - step_id_sensor
+  - _self_
+
+habitat:
+  environment:
+    iterator_options:
+      max_scene_repeat_steps: 50000
+  task:
+    success_reward: 2.5
+    slack_reward: -1.0e-3
+    lab_sensors:
+      objnav_explorer:
+        map_resolution: 128
+        beeline_dist_thresh: 3.5
+        visibility_dist: 3.0
+        area_thresh: 1.5
+        success_distance: 0.25
+        fov: 42
+      clip_objectgoal_sensor:
+        cache: data/text_embeddings/siglip.pkl
+    measurements:
+      success:
+        success_distance: 0.25
+      distance_to_goal:
+        type: OVONDistanceToGoal
+        distance_to: VIEW_POINTS
+  dataset:
+    type: OVON-v1
+    split: train
+    data_path: data/datasets/ovon/hm3d/{split}/{split}.json.gz
+  simulator:
+    type: OVONSim-v0
+    navmesh_settings:
+      agent_max_climb: 0.1
+      cell_height: 0.05
+    habitat_sim_v0:
+      allow_sliding: true
+
+habitat_baselines:
+  trainer_name: ver_dagger
+  num_environments: 32
+  total_num_steps: 150000000
+  num_updates: -1
+  num_checkpoints: 50
+  checkpoint_folder: outputs/wsla/dagger
+  tensorboard_dir: outputs/wsla/tb_dagger
+  log_file: outputs/wsla/dagger.log
+  force_torch_single_threaded: true
+  rl:
+    policy:
+      name: LANavWSLAPolicy
+      backbone: siglip
+      rgb_only: true
+      use_prev_action: true
+      freeze_backbone: true
+      obs_transforms:
+        relabel_teacher_actions:
+          teacher_label: objnav_explorer
+      wsla_config:
+        n_layers: 4
+        n_hidden: 512
+        n_heads: 4
+        expanded_states: 4
+        head_dim: 96
+        max_context_length: 500
+        intermediate_size: 2048
+        norm_eps: 1.0e-5
+        use_mlp: true
+        expand_v: 2.0
+        num_block: 1
+        overlap: 0
+        conv_size: 4
+    ppo:
+      clip_param: 0.2
+      ppo_epoch: 1
+      num_mini_batch: 16
+      value_loss_coef: 0.5
+      entropy_coef: 0.01
+      lr: 2.5e-4
+      eps: 1.0e-5
+      max_grad_norm: 0.2
+      num_steps: 500
+      use_gae: true
+      gamma: 0.99
+      tau: 0.95
+      use_linear_clip_decay: false
+      use_linear_lr_decay: false
+      use_normalized_advantage: false
+      hidden_size: 512
+    ddppo:
+      sync_frac: 0.6
+      distrib_backend: NCCL
+      pretrained: false
+      pretrained_encoder: false
+      train_encoder: false
+      reset_critic: true

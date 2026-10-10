@@ -1,0 +1,59 @@
+diff --git a/frontier_exploration/base_explorer.py b/frontier_exploration/base_explorer.py
+index d27b1c7..01948ae 100644
+--- a/frontier_exploration/base_explorer.py
++++ b/frontier_exploration/base_explorer.py
+@@ -3,6 +3,7 @@ from dataclasses import dataclass
+ from typing import Any
+ 
+ import habitat_sim
++import magnum as mn
+ import numpy as np
+ from gym import Space, spaces
+ from habitat import EmbodiedTask, Sensor, SensorTypes, registry
+@@ -32,6 +33,11 @@ class ActionIDs:
+     TURN_RIGHT = np.array([3])
+ 
+ 
++def _as_vector3(point) -> mn.Vector3:
++    point = np.asarray(point, dtype=np.float32)
++    return mn.Vector3(float(point[0]), float(point[1]), float(point[2]))
++
++
+ @registry.register_sensor
+ class BaseExplorer(Sensor):
+     """Returns the action that moves the robot towards the closest frontier"""
+@@ -282,11 +288,17 @@ class BaseExplorer(Sensor):
+             self._sim,
+         )
+         if pixel.ndim == 1:
+-            return self._sim.pathfinder.snap_point(
+-                [realworld_y, self.agent_position[1], realworld_x]
++            return np.array(
++                self._sim.pathfinder.snap_point(
++                    _as_vector3([realworld_y, self.agent_position[1], realworld_x])
++                )
+             )
+         snapped = [
+-            self._sim.pathfinder.snap_point([y, self.agent_position[1], x])
++            np.array(
++                self._sim.pathfinder.snap_point(
++                    _as_vector3([y, self.agent_position[1], x])
++                )
++            )
+             for y, x in zip(realworld_y, realworld_x)  # noqa
+         ]
+         return np.array(snapped)
+@@ -305,10 +317,10 @@ def get_next_waypoint(
+     start: np.ndarray, goal: np.ndarray, pathfinder: "PathFinder"
+ ) -> np.ndarray:
+     shortest_path = habitat_sim.nav.ShortestPath()
+-    shortest_path.requested_start = start
+-    shortest_path.requested_end = goal
++    shortest_path.requested_start = _as_vector3(start)
++    shortest_path.requested_end = _as_vector3(goal)
+     assert pathfinder.find_path(shortest_path), "No path found!"
+-    next_waypoint = shortest_path.points[1]
++    next_waypoint = np.array(shortest_path.points[1])
+     return next_waypoint
+ 
+ 

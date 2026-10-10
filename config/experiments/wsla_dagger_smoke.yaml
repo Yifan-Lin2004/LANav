@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - wsla_dagger
+  - _self_
+
+habitat_baselines:
+  num_environments: 1
+  total_num_steps: 8
+  num_checkpoints: 1
+  checkpoint_folder: outputs/smoke/dagger
+  tensorboard_dir: outputs/smoke/tb_dagger
+  log_file: outputs/smoke/dagger.log
+  rl:
+    ppo:
+      num_steps: 8
+      num_mini_batch: 1
